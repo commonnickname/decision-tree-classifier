@@ -58,7 +58,7 @@ def save_sortings(filename, sortings):
 orderings = get_orderings('orderings.csv')
 sortings = [getSortings(x) for x in orderings]
 
-#save_sortings('compact_sortings2.csv', sortings)
+save_sortings('sortings.csv', sortings)
 
 for s in sortings:
 	print(s)
