@@ -1,19 +1,9 @@
 #generates ways to sort orderings (compacted)
 
 def get_orderings(filename):
-	import csv
-	orderings = []
-	with open(filename, 'r') as csv_file:
-		csv_reader = csv.reader(csv_file)
-		orderings = list(csv_reader)
-	
-	iorderings = []
-	for ordering in orderings:
-		io = []
-		for o in ordering:
-			io.append(int(o))
-		iorderings.append(io)
-	return iorderings
+	from csv import reader as reader
+	with open(filename, 'r') as f:
+		return [[int(x) for x in order] for order in reader(f)]
 
 def pfunction(source, indices):
 	return [source[i] for i in indices]

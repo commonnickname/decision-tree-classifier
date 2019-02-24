@@ -1,10 +1,8 @@
 def get_orderings(csv_filename):
-	import csv
-	with open(csv_filename, 'r') as csv_file:
-		csv_reader = csv.reader(csv_file)
-		RAW_DATA = list(csv_reader)
-	DATA = [[int(i) for i in rd] for rd in RAW_DATA]
-	return DATA
+	from csv import reader as reader
+	with open(csv_filename, 'r') as f:
+		RAW_DATA = list(reader(f))
+	return [[int(i) for i in rd] for rd in RAW_DATA]
 	
 def save_atoms(filename, labels, rules):
 	with open(filename, 'w', newline='') as nf:
@@ -14,7 +12,6 @@ def save_atoms(filename, labels, rules):
 
 def get_rule(orderings, rule):
 	bits = [eval(rule) for x in orderings]
-
 	return bits_to_int(bits)
 	
 def bits_to_int(bits):
