@@ -36,10 +36,10 @@ def generate_rules(atoms, iterations):
 	return L
 	
 def store_rules(filename, rules):
-	pass
-	
-	
-	
+	with open(filename, 'w', newline = '') as nf:
+		for rule in rules:
+			nf.write(str(rule) + '\n')
+
 	
 	
 numof_sortings = 67
@@ -52,4 +52,5 @@ rules = generate_rules(atoms, search_depth)
 #for rule in rules:
 #	print(rule)
 	
+store_rules("4rules.csv", rules)
 print(len(rules))
