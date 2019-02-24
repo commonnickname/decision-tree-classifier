@@ -5,20 +5,17 @@ def get_orderings(filename):
 	with open(filename, 'r') as f:
 		return [[int(x) for x in order] for order in reader(f)]
 
-def pfunction(source, indices):
+def indexed(source, indices):
 	return [source[i] for i in indices]
 
 def getSortings(ordering):
-	from itertools import permutations as permutations
+	sorted_o = sorted(ordering)
+	if ordering == sorted_o: return None
 	
-	pseed = [i for i in range(len(ordering))]
-	S = []
-	sorted_ordering = sorted(ordering)
-	if (ordering == sorted_ordering): return None
-	for p in permutations(pseed):
-		if pfunction(ordering, p) == sorted_ordering:
-			S.append(p)
-	return S
+	from itertools import permutations as permutations
+	perm = (p for p in permutations(range(len(ordering))))
+	
+	return [p for p in perm if indexed(ordering, p) == sorted_o]
 
 def extractor(sortings, index):
 	
