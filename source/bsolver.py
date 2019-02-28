@@ -22,12 +22,14 @@ def bits_to_int(bits):
 		out = (out << 1) | bit
 	return out
 	
+#returns a number constructed from bits of source, specified by mask
 def bitmask(source, mask):
 	sbits = bits(source)
 	mbits = bits(mask)
-	buffer_length = (len(mbits) - len(sbits) if len(sbits) < len(mbits) else 0)
-	cutoff = (len(sbits) - len(mbits) if len(sbits) > len(mbits) else 0)
-	sbits = [0] * buffer_length + sbits[cutoff:]
+	lendiff = abs(len(mbits) - len(sbits))
+	a = (lendiff if len(sbits) < len(mbits) else 0)
+	b = (lendiff if len(sbits) > len(mbits) else 0)
+	sbits = [0] * a + sbits[b:]
 	masked = [s for s, m in zip(sbits, mbits) if m]
 	return bits_to_int(masked)
 
