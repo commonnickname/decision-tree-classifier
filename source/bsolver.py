@@ -21,6 +21,15 @@ def bits_to_int(bits):
 	for bit in bits: 
 		out = (out << 1) | bit
 	return out
+	
+def bitmask(source, mask):
+	sbits = bits(source)
+	mbits = bits(mask)
+	buffer_length = (len(mbits) - len(sbits) if len(sbits) < len(mbits) else 0)
+	cutoff = (len(sbits) - len(mbits) if len(sbits) > len(mbits) else 0)
+	sbits = [0] * buffer_length + sbits[cutoff:]
+	masked = [s for s, m in zip(sbits, mbits) if m]
+	return bits_to_int(masked)
 
 	
 #generates all x < 2^l, such that num | x == res
@@ -35,3 +44,4 @@ def andSolver(num, res, l):
 	for m in product(*L): 
 		yield bits_to_int(m)
 
+print(bitmask(7, 53))
