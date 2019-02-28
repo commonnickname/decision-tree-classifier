@@ -1,4 +1,4 @@
-from itertools import product as product
+from itertools import product, compress
 from math import log2, floor
 
 OrTable = ((	(0,),	(1,)	),
@@ -30,8 +30,9 @@ def bitmask(source, mask):
 	a = (lendiff if len(sbits) < len(mbits) else 0)
 	b = (lendiff if len(sbits) > len(mbits) else 0)
 	sbits = [0] * a + sbits[b:]
-	masked = [s for s, m in zip(sbits, mbits) if m]
-	return bits_to_int(masked)
+	print(sbits)
+	print(mbits)
+	return bits_to_int(compress(sbits, mbits))
 
 	
 #generates all x < 2^l, such that num | x == res
@@ -45,4 +46,4 @@ def andSolver(num, res, l):
 	L = (AndTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
 	for m in product(*L): 
 		yield bits_to_int(m)
-
+print(bitmask(53, 7))
