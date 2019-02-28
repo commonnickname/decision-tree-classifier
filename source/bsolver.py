@@ -46,4 +46,3 @@ def andSolver(num, res, l):
 	for m in product(*L): 
 		yield bits_to_int(m)
 
-print(bitmask(7, 53))
