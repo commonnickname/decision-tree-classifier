@@ -1,3 +1,5 @@
+from binsolver import bits_to_int as bits_to_int
+
 def get_orderings(csv_filename):
 	from csv import reader as reader
 	with open(csv_filename, 'r') as f:
@@ -13,12 +15,6 @@ def save_atoms(filename, labels, rules):
 def get_rule(orderings, rule):
 	bits = [eval(rule) for x in orderings]
 	return bits_to_int(bits)
-	
-def bits_to_int(bits):
-	out = 0
-	for bit in bits: 
-		out = (out << 1) | bit
-	return out
 	
 LABELS = [  
 		"m1 == m2", "m1 == m3", "m1 == m4", "m2 == m3", "m2 == m4", "m3 == m4",

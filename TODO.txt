@@ -1,2 +1,2 @@
-orderings
-sortings
+- Better way to remove redundant rules
+- Cheaper tests for solvability

@@ -15,6 +15,13 @@ def bits_to_int(bits):
 		out = (out << 1) | bit
 	return out
 
+def bincut(source):
+	l = 5
+
+	return bits(source, l)
+	
+	
+	
 #generates all x < 2^l, such that num | x == res
 def orSolver(num, res, l):
 	L = (OrTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
@@ -26,6 +33,10 @@ def andSolver(num, res, l):
 	L = (AndTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
 	for m in product(*L): 
 		yield bits_to_int(m)
+		
+		
+		
+print(bincut(8))
 
 
 
