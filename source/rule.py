@@ -4,7 +4,7 @@ class Rule:
 	
 	def __init__(self, number, label=None, ):
 		if label == None:
-			self.label = '? *'
+			self.label = '?'
 		else:
 			self.label = label
 		self.number = number
@@ -23,7 +23,7 @@ class Rule:
 		from bsolver import orSolver as orSolver
 		solutions = []
 		for solution in orSolver(rule.number, self.number, Rule.length):
-			new_label = '? * ' + rule.label + " or " + self.label[4:]
+			new_label = '? or ' + rule.label + self.label[1:]
 			solutions.append(Rule(solution, new_label))
 		return solutions
 		
@@ -31,7 +31,7 @@ class Rule:
 		from bsolver import andSolver as andSolver
 		solutions = []
 		for solution in andSolver(rule.number, self.number, Rule.length):
-			new_labe = '? * ' + rule.label + " and " + self.label[4:]
+			new_label = '? and ' + rule.label + self.label[1:]
 			solutions.append(Rule(solution, new_label))
 		return solutions
 		
