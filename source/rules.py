@@ -5,7 +5,7 @@ def get_atoms(filename):
 	with open(filename, 'r') as f:
 		return [Rule(l, int(n)) for l, n in reader(f)]
 
-def unique_generator(seeds, atoms, S):
+def forward_generator(seeds, atoms, S):
 	if not seeds:
 		for atom in atoms:
 			if atom not in S:
@@ -29,7 +29,7 @@ def generate_rules(atoms, iterations):
 	L, S = [], set()
 	_from, to = 0, 0
 	for _ in range(iterations):
-		L += [rule for rule in unique_generator(L[_from:to], atoms, S)]
+		L += [rule for rule in forward_generator(L[_from:to], atoms, S)]
 		_from, to = to, len(L)
 		print(to - _from)
 		

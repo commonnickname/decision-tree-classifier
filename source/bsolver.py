@@ -40,6 +40,11 @@ def orSolver(num, res, l):
 	L = (OrTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
 	for m in product(*L): 
 		yield bits_to_int(m)
+		
+def orSolver2(num, res, l):
+	L = (OrTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
+	for m in product(*L): 
+		yield bits_to_int(m)
 	
 #generates all x < 2^l, such that num & x == res
 def andSolver(num, res, l):
