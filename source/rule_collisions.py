@@ -1,5 +1,11 @@
 from rule import Rule as Rule
 	
+def setget(set_, rule):
+	for x in set_:
+		if x == rule:
+			return x
+	return None
+	
 def fgenerator(seeds, atoms, S):
 	if not seeds:
 		for atom in atoms:
@@ -51,7 +57,7 @@ def test_collisions(seeds, goals, atoms, iterations):
 		for frule in fgenerator(flist[ffrom:fto], atoms, fset):
 			print("        found " + str(frule))
 			if frule in bset: 
-				print(str(frule) + " matches")
+				print(str(frule) + " matches " + str(setget(bset, frule)))
 				return frule
 			flist.append(frule)
 		ffrom, fto = fto, len(flist)
@@ -67,6 +73,7 @@ def test_collisions(seeds, goals, atoms, iterations):
 		for brule in bgenerator(blist[bfrom:bto], atoms, bset):
 			print("        found " + str(brule))
 			if brule in fset: 
+				print(str(frule) + " matches " + str(setget(fset, brule)))
 				print(brule + " matches")
 				return brule
 			blist.append(brule)
@@ -100,8 +107,8 @@ seeds = []
 atoms = [Rule(8, "con1-8"), Rule(10, "con2-10"), Rule(12, "con3-12"), Rule(3, "ncon3-3"), Rule(7, "ncon1-7"), Rule(5, "ncon2-5")]
 goals = [Rule(9)]
 
-Rule.length = 4
-Rule.nmask = 2**4 - 1
+Rule.length = 6
+Rule.nmask = 2**6 - 1
 iterations = 8
 
 print(test_collisions(seeds, goals, atoms, iterations))
