@@ -1,9 +1,9 @@
 from rule import Rule as Rule
 
-def get_atoms(filename):
+def get_rules(filename):
 	from csv import reader as reader
 	with open(filename, 'r') as f:
-		return [Rule(l, int(n)) for l, n in reader(f)]
+		return [Rule(int(n), l) for l, n in reader(f)]
 
 def forward_generator(seeds, atoms, S):
 	if not seeds:
@@ -46,7 +46,7 @@ numof_sortings = 67
 Rule.nmask = 2**numof_sortings - 1
 search_depth = int(input("Enter search depth: "))
 
-atoms = get_atoms('atoms.csv')
+atoms = get_rules('atoms.csv')
 rules = generate_rules(atoms, search_depth)
 
 #for rule in rules:

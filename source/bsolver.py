@@ -30,18 +30,12 @@ def bitmask(source, mask):
 	a = (lendiff if len(sbits) < len(mbits) else 0)
 	b = (lendiff if len(sbits) > len(mbits) else 0)
 	sbits = [0] * a + sbits[b:]
-	print(sbits)
-	print(mbits)
+
 	return bits_to_int(compress(sbits, mbits))
 
 	
 #generates all x < 2^l, such that num | x == res
 def orSolver(num, res, l):
-	L = (OrTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
-	for m in product(*L): 
-		yield bits_to_int(m)
-		
-def orSolver2(num, res, l):
 	L = (OrTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
 	for m in product(*L): 
 		yield bits_to_int(m)
@@ -51,4 +45,4 @@ def andSolver(num, res, l):
 	L = (AndTable[n][r] for n, r in zip(bits(num, l), bits(res, l)))
 	for m in product(*L): 
 		yield bits_to_int(m)
-print(bitmask(53, 7))
+
