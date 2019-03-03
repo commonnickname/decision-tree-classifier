@@ -40,7 +40,11 @@ def bgenerator(goals, atoms, S):
 				yield andSolution
 	
 def test_collisions(seeds, goals, atoms, iterations):
+	print("ATOMS:")
 	print(atoms)
+	print("GOALS:")
+	print(goals)
+	
 	
 	flist, fset = seeds[:], set(seeds)
 	ffrom, fto = 0, len(seeds)
@@ -55,7 +59,7 @@ def test_collisions(seeds, goals, atoms, iterations):
 		
 		print("    forward generation: ")
 		for frule in fgenerator(flist[ffrom:fto], atoms, fset):
-			print("        found " + str(frule))
+			#print("        found " + str(frule))
 			if frule in bset: 
 				print(str(frule) + " matches " + str(setget(bset, frule)))
 				return frule
@@ -71,7 +75,7 @@ def test_collisions(seeds, goals, atoms, iterations):
 		
 		print("    backward generation: ")
 		for brule in bgenerator(blist[bfrom:bto], atoms, bset):
-			print("        found " + str(brule))
+			#print("        found " + str(brule))
 			if brule in fset: 
 				print(str(frule) + " matches " + str(setget(fset, brule)))
 				print(brule + " matches")
@@ -86,29 +90,32 @@ def test_collisions(seeds, goals, atoms, iterations):
 		
 	return None
 	
-	
-	return None
-	
-'''	
+
 def get_rules(filename):
+	
 	from csv import reader as reader
 	with open(filename, 'r') as f:
-		return [Rule(l, int(n)) for l, n in reader(f)]
+		return [Rule(int(n), l) for l, n in reader(f)]
 	
 def get_goals(filename):
-	return []
+	a = [1,1,2,2,2,3,3,1,1,2,3,2,2,2,3,3,2,3,2,2,2,3,0,0,3,0,0,0,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,2,3,2,2,2,3,3,3,1,1,1,1,1,1,3,2,3,2,2,3,1,1,3,2]
+	L = []
+	from itertools import combinations as combinations
+	for n1, n2 in combinations(list(range(4)), 2):
+		b = ''.join(['0' if x in [n1, n2] else '1' for x in a])
+		L.append(Rule(int(b, 2)))
 
-seeds = get_rules("filename")
-atoms = get_rules("filename")
-goals = get_goals("filename")
-'''
+	return L
+
 
 seeds = []
-atoms = [Rule(8, "con1-8"), Rule(10, "con2-10"), Rule(12, "con3-12"), Rule(3, "ncon3-3"), Rule(7, "ncon1-7"), Rule(5, "ncon2-5")]
-goals = [Rule(9)]
+atoms = get_rules("atoms.csv")
+goals = get_goals("filename")
 
-Rule.length = 6
-Rule.nmask = 2**6 - 1
+Rule.length = 67
+Rule.nmask = 2**67 - 1
 iterations = 8
+
+
 
 print(test_collisions(seeds, goals, atoms, iterations))
