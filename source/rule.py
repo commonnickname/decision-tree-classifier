@@ -2,7 +2,7 @@ class Rule:
 	nmask = 1
 	length = 1
 	
-	def __init__(self, number, label=None, ):
+	def __init__(self, number, label=None):
 		if label == None:
 			self.label = '?'
 		else:

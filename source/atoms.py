@@ -10,7 +10,6 @@ def save_atoms(filename, labels, rules):
 	with open(filename, 'w', newline='') as nf:
 		for label, rule in zip(labels, rules):
 			nf.write(label + ", " + str(rule) + '\n')
-	return
 
 def get_rule(orderings, rule):
 	bits = [eval(rule) for x in orderings]

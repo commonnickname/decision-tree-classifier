@@ -1,5 +1,2 @@
 - Better way to remove redundant rules
 - Cheaper tests for solvability
-- rule testing
-- collisions
-- hanging rules
