@@ -1,2 +1,0 @@
-#get sortings
-#get atoms
